@@ -6,3 +6,4 @@ node_modules
 /.svelte
 /build
 /functions
+gh-pages.js

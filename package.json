@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "deploy": "npm run build && npx gh-pages -d build",
+    "deploy": "npm run build && node ./gh-pages.js",
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.26",
-    "@sveltejs/kit": "next",
+    "@sveltejs/kit": "^1.0.0-next.251",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
     "autoprefixer": "^10.2.6",
@@ -28,6 +28,7 @@
     "postcss-nested": "^5.0.5",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
+    "rimraf": "^3.0.2",
     "svelte": "^3.34.0",
     "svelte-check": "^2.0.0",
     "svelte-preprocess": "^4.0.0",

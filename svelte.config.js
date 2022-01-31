@@ -1,6 +1,7 @@
 import preprocess from 'svelte-preprocess'
-import ssr from '@sveltejs/adapter-static'
+import adapter from '@sveltejs/adapter-static'
 
+const dev = process.env.NODE_ENV === 'development';
 /** @type {import('@sveltejs/kit').Config} */
 export default {
   preprocess: [
@@ -13,12 +14,17 @@ export default {
   ],
 
   kit: {
-    adapter: ssr(),
+    adapter: adapter({
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+      precompress: false
+    }),
     target: '#svelte',
     paths: {
-      base: '/thwordsearch',
-      assets: '/thwordsearch'
-    }
+      base: dev? '':'/thwordsearch',
+    },
+    appDir: 'app_'
   },
 
  
