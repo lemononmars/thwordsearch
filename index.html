@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content=""><title> TH Wordle Search</title><meta name="title" content=" TH Wordle Search" data-svelte="svelte-1k83ji"><meta name="description" content="Pattern-matching in Thai language" data-svelte="svelte-1k83ji"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-1k83ji"><meta property="og:url" content="https://lemononmars.github.io/thwordsearch" data-svelte="svelte-1k83ji"><meta property="og:type" content="website" data-svelte="svelte-1k83ji"><meta property="og:title" content=" TH Wordle Search" data-svelte="svelte-1k83ji"><meta property="og:description" content="Pattern-matching in Thai language" data-svelte="svelte-1k83ji"><meta property="og:image" content="" data-svelte="svelte-1k83ji"><meta name="twitter:title" content=" TH Wordle Search" data-svelte="svelte-1k83ji"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-1k83ji"><meta name="twitter:image" content="" data-svelte="svelte-1k83ji">
+	<link rel="stylesheet" href="/thwordsearch/internal/assets/pages/__layout.svelte-874873ab.css">
+	<link rel="modulepreload" href="/thwordsearch/internal/start-e6f91d17.js">
+	<link rel="modulepreload" href="/thwordsearch/internal/chunks/vendor-b764d929.js">
+	<link rel="modulepreload" href="/thwordsearch/internal/pages/__layout.svelte-1794dbba.js">
+	<link rel="modulepreload" href="/thwordsearch/internal/pages/index.svelte-b6b59cd5.js"><script type="module">
+		import { start } from "/thwordsearch/internal/start-e6f91d17.js";
+		start({
+			target: document.querySelector("#svelte"),
+			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/thwordsearch/internal/pages/__layout.svelte-1794dbba.js"),
+						import("/thwordsearch/internal/pages/index.svelte-b6b59cd5.js")
+				],
+				url: new URL("http://sveltekit-prerender/thwordsearch"),
+				params: {}
+			}
+		});
+	</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<main>
+<h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
+<span><input type="text" class="input input-bordered" placeholder="พิมพ์รูปแบบที่นี่" autofocus value="">
+  <button class="btn btn-primary">หา
+  </button>
+  <button class="btn btn-secondary">วิธีใช้
+  </button></span>
+
+<div class="flex-col content-center"><table class="table"><thead><tr><th>ถ้าอยากหาคำที่...</th>
+            <th>...ให้ใส่...</th>
+            <th>...จะได้</th></tr></thead>
+        <tbody><tr><td>ทราบตัวอักษรบางตำแหน่งแล้ว</td>
+            <td>ส..น</td>
+            <td>สงวน, สถาน, สุทัศน์, ...</td>
+          </tr><tr><td>คำที่ขึ้นต้นด้วย</td>
+            <td>สน*</td>
+            <td>สน, สนุก, สนามกีฬา,...</td>
+          </tr><tr><td>คำที่มีตัวอักษรเรียงกันตามลำดับ</td>
+            <td>*ก*ข*</td>
+            <td>การขาย, กักขัง, สักขีพยาน, ...</td>
+          </tr><tr><td>anagram ตัวอักษรทั้งหมด</td>
+            <td>/ขมา</td>
+            <td>ข้าม, ขี่ม้า, มีขา, ...</td>
+          </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีก 1 ตัว</td>
+            <td>/กา.</td>
+            <td>กาว, เก้า, มาก, ...</td>
+          </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้</td>
+            <td>/มก*</td>
+            <td>กม, ก้าม, กรรม, มัก, มาก, หมาก, ...</td>
+          </tr></tbody></table></div></main>
+
+</div>
+	</body>
+</html>
