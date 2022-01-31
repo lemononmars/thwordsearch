@@ -14,6 +14,12 @@ export default {
 
   kit: {
     adapter: ssr(),
-    target: '#svelte'
-  }
+    target: '#svelte',
+    paths: {
+      base: '/thwordsearch',
+      assets: '/thwordsearch'
+    }
+  },
+
+ 
 }
