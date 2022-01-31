@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content=""><title> TH Wordle Search</title><meta name="title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-7agd4s"><meta property="og:url" content="https://lemononmars.github.io/thwordsearch" data-svelte="svelte-7agd4s"><meta property="og:type" content="website" data-svelte="svelte-7agd4s"><meta property="og:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta property="og:description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta property="og:image" content="" data-svelte="svelte-7agd4s"><meta name="twitter:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-7agd4s"><meta name="twitter:image" content="" data-svelte="svelte-7agd4s">
 	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-069fb188.css">
-	<link rel="modulepreload" href="/thwordsearch/app_/start-e062d56b.js">
+	<link rel="modulepreload" href="/thwordsearch/app_/start-6eeae0f4.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-7616cd8c.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-22faf195.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-6f03339a.js"><script type="module">
-		import { start } from "/thwordsearch/app_/start-e062d56b.js";
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-fd52bb9f.js"><script type="module">
+		import { start } from "/thwordsearch/app_/start-6eeae0f4.js";
 		start({
 			target: document.querySelector("#svelte"),
 			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
@@ -18,7 +18,16 @@
 			route: true,
 			spa: false,
 			trailing_slash: "never",
-			hydrate: null
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/thwordsearch/app_/pages/__layout.svelte-22faf195.js"),
+						import("/thwordsearch/app_/pages/index.svelte-fd52bb9f.js")
+				],
+				url: new URL("http://sveltekit-prerender/thwordsearch"),
+				params: {}
+			}
 		});
 	</script>
 	</head>
@@ -28,7 +37,7 @@
 
 <main>
 <h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
-<span><input type="text" class="input input-bordered" placeholder="พิมพ์รูปแบบที่นี่" autofocus value="">
+<span><input type="text" class="input input-bordered" placeholder="พิมพ์รูปแบบที่นี่" value="">
   <button class="btn btn-primary">หา
   </button>
   <button class="btn btn-secondary">วิธีใช้
