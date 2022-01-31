@@ -5,9 +5,7 @@
   //import ToggleTheme from '$lib/ToggleTheme.svelte'
 
   onMount(() => {
-    if ($theme === 'dark') {
-      document.querySelector('html').classList.add('dark')
-    }
+    document.querySelector('html').classList.add('dark')
   })
 </script>
 

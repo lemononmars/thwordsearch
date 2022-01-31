@@ -1,5 +1,5 @@
 <script context="module">
-	export const hydrate = false;
+  export const hydrate = false;
   export const prerender = true;
 </script>
 
@@ -45,6 +45,7 @@
     if(!input)
       alert("ใส่คำก่อนสิเอ้อ!")
     else {
+      console.log('หา!')
       query = input
       start = 0
       queryResults = search(query)
@@ -61,7 +62,6 @@
     on:keypress={onKeypress}
     bind:value={input}
     placeholder="พิมพ์รูปแบบที่นี่"
-    autofocus
   />
   <button on:click={submit} class="btn btn-primary">
     หา
@@ -76,7 +76,11 @@
   {#if currentQueryResults.length > 0}
     <span>แสดงผลลัพธ์ที่ {start+1} ถึง {Math.min(start+100, queryResults.count)} จาก {queryResults.count} คำ</span><br>
     {#each currentQueryResults as qr}
-        <button class="btn btn-outline text-lg">{qr}</button>
+      <div data-tip="copy" class="tooltip">
+        <button class="btn btn-outline text-lg" on:click={()=>
+          navigator.clipboard.writeText(qr)
+        }>{qr}</button>
+      </div>
     {/each}
     <br>
     <div class="flex-row content-center">
