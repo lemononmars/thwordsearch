@@ -23,99 +23,124 @@ function isUpperOrLowerCharacter(char: string): boolean {
 }
 
 function removeSymbols(word: string) {
-  return word.replace(/[\*\.\/]/g, "")
+  return word.replace(/[\*\.\/\&\|]/g, "")
 }
 
 export function search(query: string) {
   // TODO: also check weird input (like several /, or / with multiple *)
   if(!query)
-    return {valid: false, numMatches:0, results: []}
+    return {valid: false, count:0, results: []}
 
-  query = query.replace(/\*\*/g, "\*")
+  let andMode = query.includes('&')
 
-  let querySplitted = splitWord(query)
+  let queries = query.split(/[\&\|]/).map((q)=>q.trim())
   let results = []
-  let debugs = []
-
-  let count = 0
-  let mode = {wild: false, anagram: false, filler: false}
-  const numWilds = querySplitted.reduce((prev, letter) => prev + (letter === '.'? 1:0), 0)
-  const numFillers = querySplitted.reduce((prev, letter) => prev + (letter === '*'? 1:0), 0)
-
-  if(querySplitted[0] === '/') mode.anagram = true
-  if(querySplitted.includes("*")) mode.filler = true
-  if(querySplitted.includes(".")) mode.wild = true
-
-  // Type 1: Anagram
-  if(mode.anagram) {
-    querySplitted = splitWord(removeSymbols(query))
-
-    dict.forEach((w)=>{
-      const wordSplitted = splitWord(w)
-      // first, check if their lenghts match
-      if(numFillers == 0 && wordSplitted.length != querySplitted.length + numWilds) return
-      if(numFillers > 0 && wordSplitted.length < querySplitted.length + numWilds) return
-
-      let numMatches = 0
-      for(const qIndex in querySplitted)
-        for(const wIndex in wordSplitted)
-          if(wordSplitted[wIndex] && wordSplitted[wIndex].startsWith(querySplitted[qIndex])) {
-            wordSplitted[wIndex] = null
-            numMatches ++
-            break
-          }
-        
-      // return if not all query letters match
-      if(numMatches < querySplitted.length) return
-
-      results = [...results, w]
+  // check each word against all queries
+  dict.forEach((w)=>{
+    let matchedQuery = 0
+    queries.forEach((q)=>{
+      matchedQuery += matchQuery(w,q)?1:0
     })
-  }
-
-  // Type 2: No anagram
-  if(!mode.anagram) {
-    dict.forEach((w)=>{
-      const wordSplitted = splitWord(w)
-      let qIndex = 0, wIndex = 0, broken = false
-      while(!broken && qIndex < querySplitted.length && wIndex < wordSplitted.length){
-        if(querySplitted[qIndex] === "*"){
-          qIndex ++
-          // if * was the last character, it's done!
-          if(qIndex == querySplitted.length)
-            wIndex = wordSplitted.length
-          // otherwise, find the next matching character
-          if(qIndex != querySplitted.length && querySplitted[qIndex] !== "*"){
-          let found = false
-            while(!found && wIndex < wordSplitted.length) {
-              if(wordSplitted[wIndex].startsWith(querySplitted[qIndex]))
-                found = true
-              // when found, let the next iteration matches the characters
-              else
-                wIndex ++
-            }
-            if(wIndex >= wordSplitted.length)
-              broken = true
-          }
-        }
-        // letter: must match
-        // wild: increment
-        else if(querySplitted[qIndex] === "." || wordSplitted[wIndex].startsWith(querySplitted[qIndex])) {
-          qIndex ++
-          wIndex ++
-        }
-        else
-          broken = true
-      }
-
-      if(broken || qIndex < querySplitted.length || wIndex < wordSplitted.length) return
-
+    if(
+      (andMode && matchedQuery === queries.length)
+      || (!andMode && matchedQuery > 0)
+    )
       results = [...results, w]
-    })
-  }
+  })
 
   return {
     valid: true,
     count: results.length, 
     results: results
   }
+}
+
+function matchQuery(w: string, q: string){
+  const wordSplitted = splitWord(w)
+  let querySplitted = splitWord(q)
+
+  // length
+  let minLength = 0
+  let maxLength = 100
+  if(q.includes(":")) {
+    let lengthStr = q.slice(0, q.indexOf(":"))
+    q = q.slice(q.indexOf(":")+1)
+
+    // a single number - exact match
+    if(!lengthStr.includes(":"))
+      lengthStr += ":" + lengthStr
+    const minStr = lengthStr.slice(0, lengthStr.indexOf("-"))
+    const maxStr = lengthStr.slice(lengthStr.indexOf("-")+1)
+    if(minStr.length > 0)
+      minLength = parseInt(minStr)
+    if(maxStr.length > 0)
+      maxLength = parseInt(maxStr)
+  }
+  
+  let mode = {wild: false, anagram: false, filler: false}
+  const numWilds = querySplitted.reduce((prev, letter) => prev + (letter === '.'? 1:0), 0)
+  const numFillers = querySplitted.reduce((prev, letter) => prev + (letter === '*'? 1:0), 0)
+
+  if(querySplitted[0] === '/') mode.anagram = true
+
+  // Type 1: Anagram
+  if(mode.anagram) {
+    querySplitted = splitWord(removeSymbols(q))
+    if(wordSplitted.length < minLength || wordSplitted.length > maxLength) return false
+
+    // first, check if their lenghts match
+    if(numFillers == 0 && wordSplitted.length != querySplitted.length + numWilds) return false
+    if(numFillers > 0 && wordSplitted.length < querySplitted.length + numWilds) return false
+
+    let numMatches = 0
+    for(const qIndex in querySplitted)
+      for(const wIndex in wordSplitted)
+        if(wordSplitted[wIndex] && wordSplitted[wIndex].startsWith(querySplitted[qIndex])) {
+          wordSplitted[wIndex] = null
+          numMatches ++
+          break
+        }
+      
+    // return if not all query letters match
+    if(numMatches < querySplitted.length) return false
+  }
+
+  // Type 2: No anagram
+  if(!mode.anagram) {
+    if(wordSplitted.length < minLength || wordSplitted.length > maxLength) return false
+
+    let qIndex = 0, wIndex = 0, broken = false
+    while(!broken && qIndex < querySplitted.length && wIndex < wordSplitted.length){
+      if(querySplitted[qIndex] === "*"){
+        qIndex ++
+        // if * was the last character, it's done!
+        if(qIndex == querySplitted.length)
+          wIndex = wordSplitted.length
+        // otherwise, find the next matching character
+        if(qIndex != querySplitted.length && querySplitted[qIndex] !== "*"){
+        let found = false
+          while(!found && wIndex < wordSplitted.length) {
+            if(wordSplitted[wIndex].startsWith(querySplitted[qIndex]))
+              found = true
+            // when found, let the next iteration matches the characters
+            else
+              wIndex ++
+          }
+          if(wIndex >= wordSplitted.length)
+            broken = true
+        }
+      }
+      // letter: must match
+      // wild: increment
+      else if(querySplitted[qIndex] === "." || wordSplitted[wIndex].startsWith(querySplitted[qIndex])) {
+        qIndex ++
+        wIndex ++
+      }
+      else
+        broken = true
+    }
+
+    if(broken || qIndex < querySplitted.length || wIndex < wordSplitted.length) return false
+  }
+  return true
 }
