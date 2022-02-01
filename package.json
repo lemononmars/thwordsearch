@@ -38,6 +38,7 @@
   },
   "type": "module",
   "dependencies": {
-    "daisyui": "^1.25.4"
+    "daisyui": "^1.25.4",
+    "svelte-share-buttons-component": "^1.5.0"
   }
 }

@@ -4,6 +4,7 @@
 
 <script lang="ts">
   import Head from '$lib/Head.svelte'
+  import Social from '$lib/Social.svelte'
   import {search} from '$lib/search'
 
   let query: string = ""
@@ -14,25 +15,25 @@
   $: currentQueryResults = queryResults.results.slice(start, start + Math.min(100, queryResults.count-start))
 
   const url = "https://lemononmars.github.io/thwordsearch"
-  const title = `${query || ""} TH Wordle Search`
+  const title = "TH Wordle Search"
   const description = "Pattern-matching in Thai language"
   const imageUrl = ""
-  const gtagId = ""
+  const gtagId = "G-YTV7TZ3EMC"
 
   let modalText: string = ""
 
   const examples = [
-    ["ทราบตัวอักษรบางตำแหน่งแล้ว","ส..น", "สงวน, สถาน, สุทัศน์, ..."],
+    ["มีตัวอักษรในตำแหน่งที่กำหนด","ส..น", "สงวน, สถาน, สุทัศน์, ..."],
     //["ตัวอักษรบางตำแหน่งเป็นไปได้หลายแบบ", "กร?ะ..", "กระจก, กะได, ..."],
-    ["ขึ้นต้นด้วย", "สน*", "สน, สนุก, สนามกีฬา,..."],
-    ["มีตัวอักษรเรียงกันตามลำดับ", "*ก*ข*", "การขาย, กักขัง, สักขีพยาน, ..."],
-    ["anagram ตัวอักษรทั้งหมด", "/าขม", "ขมา, ข้าม, ขี่ม้า, ..."],
-    ["anagram ตัวอักษรทั้งหมด และเพิ่มอีก 1 ตัว", "/กา.", "กาว, เก้า, มาก, ..."],
-    ["anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้", "/มก*", "กม, ก้าม, กรรม, มัก, มาก, หมาก, ..."],
-    ["มีไม่เกิน 6 ตัวอักษร และขึ้นต้นด้วย ที","-6:ที*", "ทีฆชาติ, ทีฆายุกา, ที่ปรึกษา, ..."],
+    ["ขึ้นต้นด้วย สับ", "สับ*", "สับไก, สับราง, สับปะรด,..."],
+    ["มีตัวอักษรเรียงกันตามลำดับ", "*ธ*ท*", "กรีธาทัพ, ธรณีวิทยา, อิทธิบาท, ..."],
+    ["anagram ตัวอักษรทั้งหมด", "/กลม", "กมล, มกุล, มีลูก, ..."],
+    ["anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้", "/กะลา*", "การละคร, เจาะลึก, เพาะปลูก, ..."],
     ["มี 3-8 ตัวอักษร และมี ก ข ค", "3-8:/กขค*", "ขนมครก, คณะลูกขุน, คุกเข่า, ..."],
-    ["มีอย่างน้อย 7 ตัวอักษร และมี ฆ", "7-:*ฆ*", "การโฆษณา, ฆ้องกระแต, ..."],
-    ["มี 7 ตัวอักษร มี ม อยู่ตำแหน่งที่ 3 และมี ส ะ", "7:..ม* & /สะ*", "สามัตถิยะ, เหมาะสม, อัสมิมานะ"]
+    ["มีอย่างน้อย 12 ตัวอักษร และมี ปลา", "12-:*ปลา*", "กระต่ายแก่แม่ปลาช่อน, ..."],
+    ["มี 7 ตัวอักษร มี ม อยู่ตำแหน่งที่ 3 และมี ส ะ", "7:..ม* & /สะ*", "สามัตถิยะ, เหมาะสม, อัสมิมานะ"],
+    ["มี 11 ตัวอักษร และไม่มีสระในบรรทัด", "11:/* & ^ใเแโไาำะฤา", "กล้องจุลทรรศน์, ..."],
+    ["มี ฮ แต่ไม่ได้ขึ้นต้นด้วย ฮ", "/*ฮ & !ฮ*", "เก๊กฮวย, นกฮูก, เฮ, ..."]
   ]
 
   function onKeypress(e: KeyboardEvent){
@@ -58,9 +59,9 @@
 
 
 
-<div class="flex flex-col justify-right justify-items-center text-center">
+<div class="flex flex-col justify-items-center text-center gap-2">
   <h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
-  <div>
+  <div class="flex flex-row justify-center gap-2">
     <input
       type="text"
       class="input input-bordered text-xl"
@@ -88,7 +89,6 @@
           </div>
         {/each}
         <br>
-        <div class="flex-row content-center">
           <div class="btn-group items-center">
             {#each Array(Math.floor(queryResults.count/100)+1) as _, idx}
               <button class="btn" name="pageButtons" on:click={()=>{
@@ -99,7 +99,6 @@
               </button> 
             {/each}
           </div>
-        </div>
       {:else}
         <span>ไม่เจอรูปแบบ </span> <span class="text-red-400"> {query} </span> <span>ลองใหม่นะ</span>
       {/if}
@@ -129,8 +128,9 @@
 </div>
 
 <footer class="p-4 footer bg-base-300 text-base-content footer-center">
-  <span>
+  <div class="flex flex-row justify-center">
     <a href="https://github.com/lemononmars/thwordsearch" target="_blank" class="link link-primary">Github</a>
     <a href="https://twitter.com/SakulbuthE" target="_blank" class="link link-primary">เสนอแนะ/แจ้งบัค</a>
-  <span>
+  <Social {url} {title} {description}/>
+  </div>
 </footer>

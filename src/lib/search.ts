@@ -6,11 +6,9 @@ export function splitWord(word: string) {
   const out = []
 
   alphas.forEach((a) => {
-    // ถ้าตัวอักษรเป็นตัวตรงกลาง ให้ถือเป็นตัวใหม่
     if (a.match(/[ก-ฮ]/) || a.match(/[ใเแโไาำะๆฯฤา]/) || a.match(/[\.\*\/]/)) {
       out.push(a)
     } else {
-      // ถ้าเป็นสระบนล่าง หรือวรรณยุกต์ ให้ต่อท้ายตัวเดิม
       out[out.length - 1] += a
     }
   })
@@ -23,7 +21,7 @@ function isUpperOrLowerCharacter(char: string): boolean {
 }
 
 function removeSymbols(word: string) {
-  return word.replace(/[\*\.\/\&\|]/g, "")
+  return word.replace(/[\*\.\/\&\|\^\[\]]/g, "")
 }
 
 export function search(query: string) {
@@ -32,14 +30,26 @@ export function search(query: string) {
     return {valid: false, count:0, results: []}
 
   let andMode = query.includes('&')
-
   let queries = query.split(/[\&\|]/).map((q)=>q.trim())
+
+  let excluded = []
+  let excludedQuery = queries.filter((q)=>q.includes("^"))
+  excludedQuery.forEach((eq)=> 
+    excluded = excluded.concat(splitWord(removeSymbols(eq)))
+  )
+  queries = queries.filter((q)=>!q.includes("^"))
+  // special case: if the user only inputs exclusion string, we search for all strings!
+  if(excluded.length > 0 && queries.length == 0)
+    queries = ['*']
+  
   let results = []
   // check each word against all queries
   dict.forEach((w)=>{
     let matchedQuery = 0
     queries.forEach((q)=>{
-      matchedQuery += matchQuery(w,q)?1:0
+      var result = matchQuery(w,q,excluded)
+      result = q.includes("!")? !result: result
+      matchedQuery += result?1:0
     })
     if(
       (andMode && matchedQuery === queries.length)
@@ -55,7 +65,12 @@ export function search(query: string) {
   }
 }
 
-function matchQuery(w: string, q: string){
+function matchQuery(w: string, q: string, e:string[]):boolean{
+  // return if the word has any excluded character
+  if(e.some((ec)=>w.includes(ec))) return false
+
+  // ignore negation (!) and only check after returned
+  q = q.replace(/[\!]/g, "")
   const wordSplitted = splitWord(w)
   let querySplitted = splitWord(q)
 
@@ -109,8 +124,8 @@ function matchQuery(w: string, q: string){
   if(!mode.anagram) {
     if(wordSplitted.length < minLength || wordSplitted.length > maxLength) return false
 
-    let qIndex = 0, wIndex = 0, broken = false
-    while(!broken && qIndex < querySplitted.length && wIndex < wordSplitted.length){
+    let qIndex = 0, wIndex = 0
+    while(qIndex < querySplitted.length && wIndex < wordSplitted.length){
       if(querySplitted[qIndex] === "*"){
         qIndex ++
         // if * was the last character, it's done!
@@ -118,7 +133,7 @@ function matchQuery(w: string, q: string){
           wIndex = wordSplitted.length
         // otherwise, find the next matching character
         if(qIndex != querySplitted.length && querySplitted[qIndex] !== "*"){
-        let found = false
+          let found = false
           while(!found && wIndex < wordSplitted.length) {
             if(wordSplitted[wIndex].startsWith(querySplitted[qIndex]))
               found = true
@@ -126,8 +141,7 @@ function matchQuery(w: string, q: string){
             else
               wIndex ++
           }
-          if(wIndex >= wordSplitted.length)
-            broken = true
+          if(wIndex >= wordSplitted.length) return false
         }
       }
       // letter: must match
@@ -137,10 +151,17 @@ function matchQuery(w: string, q: string){
         wIndex ++
       }
       else
-        broken = true
+        return false
     }
 
-    if(broken || qIndex < querySplitted.length || wIndex < wordSplitted.length) return false
+    //special case: * is at the end of query string
+    // w = ABC
+    // q = ABC*
+    // here, w finishes earlier, but it should be matched to q
+    if(wIndex == wordSplitted.length && qIndex == querySplitted.length-1 && querySplitted[qIndex] === "*")
+      return true
+    if(qIndex < querySplitted.length || wIndex < wordSplitted.length) 
+      return false
   }
   return true
 }
