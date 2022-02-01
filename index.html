@@ -4,13 +4,22 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta http-equiv="content-security-policy" content=""><title> TH Wordle Search</title><meta name="title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-7agd4s"><meta property="og:url" content="https://lemononmars.github.io/thwordsearch" data-svelte="svelte-7agd4s"><meta property="og:type" content="website" data-svelte="svelte-7agd4s"><meta property="og:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta property="og:description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta property="og:image" content="" data-svelte="svelte-7agd4s"><meta name="twitter:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-7agd4s"><meta name="twitter:image" content="" data-svelte="svelte-7agd4s">
-	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-9a2d00e8.css">
-	<link rel="modulepreload" href="/thwordsearch/app_/start-b89b1d27.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-7616cd8c.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-22faf195.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-ad9ef822.js"><script type="module">
-		import { start } from "/thwordsearch/app_/start-b89b1d27.js";
+		<meta http-equiv="content-security-policy" content=""><title>TH Wordle Search</title><meta name="title" content="TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-7agd4s"><meta property="og:url" content="https://lemononmars.github.io/thwordsearch" data-svelte="svelte-7agd4s"><meta property="og:type" content="website" data-svelte="svelte-7agd4s"><meta property="og:title" content="TH Wordle Search" data-svelte="svelte-7agd4s"><meta property="og:description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta property="og:image" content="https://raw.githubusercontent.com/lemononmars/thwordsearch/main/static/thwordle_cover.png" data-svelte="svelte-7agd4s"><meta name="twitter:title" content="TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-7agd4s"><meta name="twitter:image" content="https://raw.githubusercontent.com/lemononmars/thwordsearch/main/static/thwordle_cover.png" data-svelte="svelte-7agd4s">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTV7TZ3EMC" data-svelte="svelte-7agd4s"></script>
+    <script data-svelte="svelte-7agd4s">window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag("js", new Date())
+      gtag("config", `${gtagId}`)
+    </script>
+	<link rel="stylesheet" href="/thwordsearch/app_/assets/vendor-4ea7804a.css">
+	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-2bd70b3d.css">
+	<link rel="modulepreload" href="/thwordsearch/app_/start-8d122f12.js">
+	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-ae7c270d.js">
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-77a58fa8.js">
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-b86e8645.js"><script type="module">
+		import { start } from "/thwordsearch/app_/start-8d122f12.js";
 		start({
 			target: document.querySelector("#svelte"),
 			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
@@ -22,8 +31,8 @@
 				status: 200,
 				error: null,
 				nodes: [
-					import("/thwordsearch/app_/pages/__layout.svelte-22faf195.js"),
-						import("/thwordsearch/app_/pages/index.svelte-ad9ef822.js")
+					import("/thwordsearch/app_/pages/__layout.svelte-77a58fa8.js"),
+						import("/thwordsearch/app_/pages/index.svelte-b86e8645.js")
 				],
 				url: new URL("http://sveltekit-prerender/thwordsearch"),
 				params: {}
@@ -40,8 +49,8 @@
 
 
 
-<div class="flex flex-col justify-right justify-items-center text-center"><h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
-  <div><input type="text" class="input input-bordered text-xl" placeholder="พิมพ์รูปแบบที่นี่" value="">
+<div class="flex flex-col justify-items-center text-center gap-2"><h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
+  <div class="flex flex-row justify-center gap-2"><input type="text" class="input input-bordered text-xl" placeholder="พิมพ์รูปแบบที่นี่" value="">
     <button class="btn btn-primary">หา
     </button>
     <button class="btn btn-secondary">วิธีใช้
@@ -50,34 +59,26 @@
   <div class="overflow-x-auto"><table class="table table-compact table-zebra w-full lg:table-normal"><thead><tr><th>ถ้าอยากหาคำที่...</th>
             <th>...ให้ใส่...</th>
             <th>...จะได้</th></tr></thead>
-        <tbody><tr><td>ทราบตัวอักษรบางตำแหน่งแล้ว</td>
+        <tbody><tr><td>มีตัวอักษรในตำแหน่งที่กำหนด</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">ส..น</button>
               </div></td>
             <td>สงวน, สถาน, สุทัศน์, ...</td>
-          </tr><tr><td>ขึ้นต้นด้วย</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">สน*</button>
+          </tr><tr><td>ขึ้นต้นด้วย สับ</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">สับ*</button>
               </div></td>
-            <td>สน, สนุก, สนามกีฬา,...</td>
+            <td>สับไก, สับราง, สับปะรด,...</td>
           </tr><tr><td>มีตัวอักษรเรียงกันตามลำดับ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">*ก*ข*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">*ธ*ท*</button>
               </div></td>
-            <td>การขาย, กักขัง, สักขีพยาน, ...</td>
+            <td>กรีธาทัพ, ธรณีวิทยา, อิทธิบาท, ...</td>
           </tr><tr><td>anagram ตัวอักษรทั้งหมด</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/าขม</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กลม</button>
               </div></td>
-            <td>ขมา, ข้าม, ขี่ม้า, ...</td>
-          </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีก 1 ตัว</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กา.</button>
-              </div></td>
-            <td>กาว, เก้า, มาก, ...</td>
+            <td>กมล, มกุล, มีลูก, ...</td>
           </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กะลา*</button>
               </div></td>
             <td>การละคร, เจาะลึก, เพาะปลูก, ...</td>
-          </tr><tr><td>มีไม่เกิน 6 ตัวอักษร และขึ้นต้นด้วย ที</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">-6:ที*</button>
-              </div></td>
-            <td>ทีฆชาติ, ทีฆายุกา, ที่ปรึกษา, ...</td>
           </tr><tr><td>มี 3-8 ตัวอักษร และมี ก ข ค</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">3-8:/กขค*</button>
               </div></td>
@@ -94,11 +95,18 @@
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">11:/* &amp; ^ใเแโไาำะฤา</button>
               </div></td>
             <td>กล้องจุลทรรศน์, ...</td>
+          </tr><tr><td>มี ฮ แต่ไม่ได้ขึ้นต้นด้วย ฮ</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/*ฮ &amp; !ฮ*</button>
+              </div></td>
+            <td>เก๊กฮวย, นกฮูก, เฮ, ...</td>
           </tr></tbody></table></div></div>
 
-<footer class="p-4 footer bg-base-300 text-base-content footer-center"><span><a href="https://github.com/lemononmars/thwordsearch" target="_blank" class="link link-primary">Github</a>
+<footer class="p-4 footer bg-base-300 text-base-content footer-center"><div class="flex flex-row justify-center"><a href="https://github.com/lemononmars/thwordsearch" target="_blank" class="link link-primary">Github</a>
     <a href="https://twitter.com/SakulbuthE" target="_blank" class="link link-primary">เสนอแนะ/แจ้งบัค</a>
-  <span></span></span></footer></main>
+  <div><a class="ssbc-button__link svelte-1xy3tb8" href="https://facebook.com/sharer/sharer.php?u=https://lemononmars.github.io/thwordsearch&amp;quote=Pattern-matching%20in%20Thai%20language" target="_blank" rel="noopener" aria-label="Share on Facebook"><div class="ssbc-button ssbc-button--facebook h-10 w-10 svelte-1xy3tb8"><div aria-hidden="true" class="ssbc-button__icon svelte-1xy3tb8 ssbc-button__icon--fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"></path></svg></div>
+    </div></a>
+     <a class="ssbc-button__link svelte-1xy3tb8" href="https://twitter.com/intent/tweet/?text=TH%20Wordle%20Search%20-%20Pattern-matching%20in%20Thai%20language&amp;hashtags=&amp;via=&amp;related=&amp;url=https://lemononmars.github.io/thwordsearch" target="_blank" rel="noopener" aria-label="Share on Twitter"><div class="ssbc-button ssbc-button--twitter h-10 w-10 svelte-1xy3tb8"><div aria-hidden="true" class="ssbc-button__icon svelte-1xy3tb8 ssbc-button__icon--fill"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"></path></svg></div>
+    </div></a></div></div></footer></main>
 
 </div>
 	</body>
