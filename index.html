@@ -5,12 +5,12 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content=""><title> TH Wordle Search</title><meta name="title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta name="viewport" content="width=device-width, initial-scale=1" data-svelte="svelte-7agd4s"><meta property="og:url" content="https://lemononmars.github.io/thwordsearch" data-svelte="svelte-7agd4s"><meta property="og:type" content="website" data-svelte="svelte-7agd4s"><meta property="og:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta property="og:description" content="Pattern-matching in Thai language" data-svelte="svelte-7agd4s"><meta property="og:image" content="" data-svelte="svelte-7agd4s"><meta name="twitter:title" content=" TH Wordle Search" data-svelte="svelte-7agd4s"><meta name="twitter:card" content="summary_large_image" data-svelte="svelte-7agd4s"><meta name="twitter:image" content="" data-svelte="svelte-7agd4s">
-	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-c974242a.css">
-	<link rel="modulepreload" href="/thwordsearch/app_/start-f7393bf4.js">
+	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-9a2d00e8.css">
+	<link rel="modulepreload" href="/thwordsearch/app_/start-b89b1d27.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-7616cd8c.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-22faf195.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-8a783f92.js"><script type="module">
-		import { start } from "/thwordsearch/app_/start-f7393bf4.js";
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-ad9ef822.js"><script type="module">
+		import { start } from "/thwordsearch/app_/start-b89b1d27.js";
 		start({
 			target: document.querySelector("#svelte"),
 			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
@@ -23,7 +23,7 @@
 				error: null,
 				nodes: [
 					import("/thwordsearch/app_/pages/__layout.svelte-22faf195.js"),
-						import("/thwordsearch/app_/pages/index.svelte-8a783f92.js")
+						import("/thwordsearch/app_/pages/index.svelte-ad9ef822.js")
 				],
 				url: new URL("http://sveltekit-prerender/thwordsearch"),
 				params: {}
@@ -71,9 +71,9 @@
               </div></td>
             <td>กาว, เก้า, มาก, ...</td>
           </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/มก*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กะลา*</button>
               </div></td>
-            <td>กม, ก้าม, กรรม, มัก, มาก, หมาก, ...</td>
+            <td>การละคร, เจาะลึก, เพาะปลูก, ...</td>
           </tr><tr><td>มีไม่เกิน 6 ตัวอักษร และขึ้นต้นด้วย ที</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">-6:ที*</button>
               </div></td>
@@ -82,14 +82,18 @@
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">3-8:/กขค*</button>
               </div></td>
             <td>ขนมครก, คณะลูกขุน, คุกเข่า, ...</td>
-          </tr><tr><td>มีอย่างน้อย 7 ตัวอักษร และมี ฆ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">7-:*ฆ*</button>
+          </tr><tr><td>มีอย่างน้อย 12 ตัวอักษร และมี ปลา</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">12-:*ปลา*</button>
               </div></td>
-            <td>การโฆษณา, ฆ้องกระแต, ...</td>
+            <td>กระต่ายแก่แม่ปลาช่อน, ...</td>
           </tr><tr><td>มี 7 ตัวอักษร มี ม อยู่ตำแหน่งที่ 3 และมี ส ะ</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">7:..ม* &amp; /สะ*</button>
               </div></td>
             <td>สามัตถิยะ, เหมาะสม, อัสมิมานะ</td>
+          </tr><tr><td>มี 11 ตัวอักษร และไม่มีสระในบรรทัด</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">11:/* &amp; ^ใเแโไาำะฤา</button>
+              </div></td>
+            <td>กล้องจุลทรรศน์, ...</td>
           </tr></tbody></table></div></div>
 
 <footer class="p-4 footer bg-base-300 text-base-content footer-center"><span><a href="https://github.com/lemononmars/thwordsearch" target="_blank" class="link link-primary">Github</a>
