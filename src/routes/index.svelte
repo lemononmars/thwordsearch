@@ -1,18 +1,18 @@
-<script context="module">
-  export const prerender = true;
-</script>
-
 <script lang="ts">
   import Head from '$lib/Head.svelte'
   import Social from '$lib/Social.svelte'
-  import {search} from '$lib/search'
+  import {search, getFirstLetter} from '$lib/search'
 
   let query: string = ""
   let start: number = 0
   let input: string = query
   const atHomePage: boolean = (!query)? true: false
   let queryResults = search(query)
-  $: currentQueryResults = queryResults.results.slice(start, start + Math.min(100, queryResults.count-start))
+  let mode: number = 1 // 0 = page, 1 = first letter
+  let letter: string = ""
+  let allFirstLetters = []
+  $: filteredResults = letter === "" ? queryResults.results: queryResults.results.filter(r=>getFirstLetter(r) == letter)
+  $: currentQueryResults = filteredResults.slice(start, start + Math.min(100, queryResults.count-start))
 
   const url = "https://lemononmars.github.io/thwordsearch"
   const title = "TH Wordle Search"
@@ -49,7 +49,21 @@
     else {
       query = input
       start = 0
+      letter = ""
       queryResults = search(query)
+
+      allFirstLetters = []
+      if(queryResults.results.length == 0)
+        return
+      let latest = getFirstLetter(queryResults.results[0])
+      allFirstLetters.push(latest)
+      
+      for(var w of queryResults.results) {
+        if(getFirstLetter(w) != latest) {
+          latest = getFirstLetter(w)
+          allFirstLetters.push(latest)
+        }
+      }
     }
   }
 </script>
@@ -77,28 +91,48 @@
     </button> 
   </div>
 
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto mx-auto">
     {#if query}
-      {#if currentQueryResults.length > 0}
-        <span>แสดงผลลัพธ์ที่ {start+1} ถึง {Math.min(start+100, queryResults.count)} จาก {queryResults.count} คำ</span><br>
+      {#if filteredResults.length > 0}
+        <div class="btn-group justify-center my-4">
+          {#each Array(Math.floor(filteredResults.length/100)+1) as _, idx}
+            <button class="btn btn-sm {idx == start/100 ? 'btn-accent': ''}" name="pageButtons" on:click={()=>{
+              start=idx*100;
+              window.scrollTo(0, 0)
+            }}>
+              {idx+1}
+            </button> 
+          {/each}
+        </div>
+        <div class="btn-group justify-center my-4">
+          {#each allFirstLetters as a}
+            <button class="btn btn-sm {a == letter ? 'btn-accent': ''} text-lg" name="pageButtons" on:click={()=>{
+              letter = letter == a? "": a;
+              start = 0;
+              window.scrollTo(0, 0)
+            }}>
+              {a}
+            </button> 
+          {/each}
+        </div>
+        <span>แสดงผลลัพธ์หน้าที่ {start/100 + 1} ({start+1} ถึง {Math.min(start+100, queryResults.count)}) จาก {queryResults.count} คำ</span><br>
         {#each currentQueryResults as qr}
           <div data-tip="copy" class="tooltip">
-            <button class="btn btn-outline text-lg font-thin" on:click={()=>
+            <button class="btn btn-outline text-lg font-thin m-0.5" on:click={()=>
               navigator.clipboard.writeText(qr)
             }>{qr}</button>
           </div>
         {/each}
-        <br>
-          <div class="btn-group items-center">
-            {#each Array(Math.floor(queryResults.count/100)+1) as _, idx}
-              <button class="btn" name="pageButtons" on:click={()=>{
-                start=idx*100;
-                window.scrollTo(0, 0)
-              }}>
-                {idx+1}
-              </button> 
-            {/each}
-          </div>
+        <div class="btn-group justify-center my-4">
+          {#each Array(Math.floor(filteredResults.length/100)+1) as _, idx}
+            <button class="btn btn-sm {idx == start/100 ? 'btn-accent': ''}" name="pageButtons" on:click={()=>{
+              start=idx*100;
+              window.scrollTo(0, 0)
+            }}>
+              {idx+1}
+            </button> 
+          {/each}
+        </div>
       {:else}
         <span>ไม่เจอรูปแบบ </span> <span class="text-red-400"> {query} </span> <span>ลองใหม่นะ</span>
       {/if}

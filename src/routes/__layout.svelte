@@ -1,6 +1,5 @@
 <script lang="ts">
   import '../global.postcss'
-  import { theme } from './store'
   import { onMount } from 'svelte'
   //import ToggleTheme from '$lib/ToggleTheme.svelte'
 

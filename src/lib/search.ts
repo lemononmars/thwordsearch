@@ -16,6 +16,12 @@ export function splitWord(word: string) {
   return out
 }
 
+export function getFirstLetter(word: string) {
+  for(var l of word.split(""))
+    if(l.match(/[ก-ฮ]/)) return l
+  return ""
+}
+
 function isUpperOrLowerCharacter(char: string): boolean {
   return !char.match(/[ก-ฮ]/) && !char.match(/[ใเแโไาำะๆฯฤา]/)
 }
