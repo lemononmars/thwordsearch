@@ -71,22 +71,20 @@
 <Head {title} {description} {url} {imageUrl} {gtagId} />
 
 
-
-
 <div class="flex flex-col justify-items-center text-center gap-2">
-  <h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
+  <h1 class="text-md lg:text-5xl font-extrabold mb-2">TH Wordle Search</h1>
   <div class="flex flex-row justify-center gap-2">
     <input
       type="text"
-      class="input input-bordered text-xl"
+      class="input input-bordered input-sm lg:input-md lg:text-xl"
       on:keypress={onKeypress}
       bind:value={input}
       placeholder="พิมพ์รูปแบบที่นี่"
     />
-    <button on:click={submit} class="btn btn-primary">
+    <button on:click={submit} class="btn btn-sm lg:btn-md btn-primary">
       หา
     </button>
-    <button on:click={()=>query=""} class="btn btn-secondary">
+    <button on:click={()=>query=""} class="btn btn-sm lg:btn-md btn-secondary">
       วิธีใช้
     </button> 
   </div>
@@ -106,7 +104,7 @@
         </div>
         <div class="btn-group justify-center my-4">
           {#each allFirstLetters as a}
-            <button class="btn btn-sm {a == letter ? 'btn-accent': ''} text-lg" name="pageButtons" on:click={()=>{
+            <button class="btn btn-sm {a == letter ? 'btn-accent': ''} text-lg font-thin" name="pageButtons" on:click={()=>{
               letter = letter == a? "": a;
               start = 0;
               window.scrollTo(0, 0)
@@ -118,7 +116,7 @@
         <span>แสดงผลลัพธ์หน้าที่ {start/100 + 1} ({start+1} ถึง {Math.min(start+100, queryResults.count)}) จาก {queryResults.count} คำ</span><br>
         {#each currentQueryResults as qr}
           <div data-tip="copy" class="tooltip">
-            <button class="btn btn-outline text-lg font-thin m-0.5" on:click={()=>
+            <button class="btn btn-outline btn-sm lg:btn-md lg:text-xl font-thin m-0.5" on:click={()=>
               navigator.clipboard.writeText(qr)
             }>{qr}</button>
           </div>
@@ -137,7 +135,7 @@
         <span>ไม่เจอรูปแบบ </span> <span class="text-red-400"> {query} </span> <span>ลองใหม่นะ</span>
       {/if}
     {:else}
-      <table class="table table-compact table-zebra w-full lg:table-normal">
+      <table class="table table-compact table-zebra w-full lg:table-normal hidden lg:block">
         <thead>
           <tr>
             <th>ถ้าอยากหาคำที่...</th>
@@ -150,10 +148,31 @@
           <tr>
             <td>{desc}</td>
             <td><div data-tip="ลองเลย" class="tooltip">
-              <button class='btn btn-info btn-block text-sm font-normal lg:text-xl' on:click={()=>input=ip}>{ip}</button>
+              <button class='btn btn-info btn-block font-thin text-xl' on:click={()=>input=ip}>{ip}</button>
               </div></td>
             <td>{result}</td>
           </tr>
+          {/each}
+        </tbody>
+      </table>
+      <table class="table table-compact table-zebra w-48 lg:hidden">
+        <thead>
+          <tr>
+            <th>ถ้าอยากหาคำที่...ให้ใส่...</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {#each examples as [desc, ip, result]}
+            <tr>
+              <td>
+                <p>{desc}</p>
+                <div data-tip="ลองเลย" class="tooltip">
+                  <button class='btn btn-info btn-xs text-sm' on:click={()=>input=ip}>{ip}</button>
+                </div>
+                <br>
+              </td>
+            </tr>
           {/each}
         </tbody>
       </table>
