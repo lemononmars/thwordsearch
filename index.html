@@ -14,12 +14,12 @@
       gtag("config", `${gtagId}`)
     </script>
 	<link rel="stylesheet" href="/thwordsearch/app_/assets/vendor-4ea7804a.css">
-	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-bda447a9.css">
-	<link rel="modulepreload" href="/thwordsearch/app_/start-96abc0c8.js">
+	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-c041c429.css">
+	<link rel="modulepreload" href="/thwordsearch/app_/start-70fc5690.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-3ed23e30.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-69490e9f.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-69193687.js"><script type="module">
-		import { start } from "/thwordsearch/app_/start-96abc0c8.js";
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-36ff7931.js"><script type="module">
+		import { start } from "/thwordsearch/app_/start-70fc5690.js";
 		start({
 			target: document.querySelector("#svelte"),
 			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
@@ -32,7 +32,7 @@
 				error: null,
 				nodes: [
 					import("/thwordsearch/app_/pages/__layout.svelte-69490e9f.js"),
-						import("/thwordsearch/app_/pages/index.svelte-69193687.js")
+						import("/thwordsearch/app_/pages/index.svelte-36ff7931.js")
 				],
 				url: new URL("http://sveltekit-prerender/thwordsearch"),
 				params: {}
@@ -47,59 +47,89 @@
 <main>
 
 
-
-
-<div class="flex flex-col justify-items-center text-center gap-2"><h1 class="text-5xl font-extrabold mb-2">TH Wordle Search</h1>
-  <div class="flex flex-row justify-center gap-2"><input type="text" class="input input-bordered text-xl" placeholder="พิมพ์รูปแบบที่นี่" value="">
-    <button class="btn btn-primary">หา
+<div class="flex flex-col justify-items-center text-center gap-2"><h1 class="text-md lg:text-5xl font-extrabold mb-2">TH Wordle Search</h1>
+  <div class="flex flex-row justify-center gap-2"><input type="text" class="input input-bordered input-sm lg:input-md lg:text-xl" placeholder="พิมพ์รูปแบบที่นี่" value="">
+    <button class="btn btn-sm lg:btn-md btn-primary">หา
     </button>
-    <button class="btn btn-secondary">วิธีใช้
+    <button class="btn btn-sm lg:btn-md btn-secondary">วิธีใช้
     </button></div>
 
-  <div class="overflow-x-auto mx-auto"><table class="table table-compact table-zebra w-full lg:table-normal"><thead><tr><th>ถ้าอยากหาคำที่...</th>
+  <div class="overflow-x-auto mx-auto"><table class="table table-compact table-zebra w-full lg:table-normal hidden lg:block"><thead><tr><th>ถ้าอยากหาคำที่...</th>
             <th>...ให้ใส่...</th>
             <th>...จะได้</th></tr></thead>
         <tbody><tr><td>มีตัวอักษรในตำแหน่งที่กำหนด</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">ส..น</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">ส..น</button>
               </div></td>
             <td>สงวน, สถาน, สุทัศน์, ...</td>
           </tr><tr><td>ขึ้นต้นด้วย สับ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">สับ*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">สับ*</button>
               </div></td>
             <td>สับไก, สับราง, สับปะรด,...</td>
           </tr><tr><td>มีตัวอักษรเรียงกันตามลำดับ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">*ธ*ท*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">*ธ*ท*</button>
               </div></td>
             <td>กรีธาทัพ, ธรณีวิทยา, อิทธิบาท, ...</td>
           </tr><tr><td>anagram ตัวอักษรทั้งหมด</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กลม</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">/กลม</button>
               </div></td>
             <td>กมล, มกุล, มีลูก, ...</td>
           </tr><tr><td>anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/กะลา*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">/กะลา*</button>
               </div></td>
             <td>การละคร, เจาะลึก, เพาะปลูก, ...</td>
           </tr><tr><td>มี 3-8 ตัวอักษร และมี ก ข ค</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">3-8:/กขค*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">3-8:/กขค*</button>
               </div></td>
             <td>ขนมครก, คณะลูกขุน, คุกเข่า, ...</td>
           </tr><tr><td>มีอย่างน้อย 12 ตัวอักษร และมี ปลา</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">12-:*ปลา*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">12-:*ปลา*</button>
               </div></td>
             <td>กระต่ายแก่แม่ปลาช่อน, ...</td>
           </tr><tr><td>มี 7 ตัวอักษร มี ม อยู่ตำแหน่งที่ 3 และมี ส ะ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">7:..ม* &amp; /สะ*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">7:..ม* &amp; /สะ*</button>
               </div></td>
             <td>สามัตถิยะ, เหมาะสม, อัสมิมานะ</td>
           </tr><tr><td>มี 11 ตัวอักษร และไม่มีสระในบรรทัด</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">11:/* &amp; ^ใเแโไาำะฤา</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">11:/* &amp; ^ใเแโไาำะฤา</button>
               </div></td>
             <td>กล้องจุลทรรศน์, ...</td>
           </tr><tr><td>มี ฮ แต่ไม่ได้ขึ้นต้นด้วย ฮ</td>
-            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block text-sm font-normal lg:text-xl">/*ฮ &amp; !ฮ*</button>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">/*ฮ &amp; !ฮ*</button>
               </div></td>
             <td>เก๊กฮวย, นกฮูก, เฮ, ...</td>
-          </tr></tbody></table></div></div>
+          </tr></tbody></table>
+      <table class="table table-compact table-zebra w-48 lg:hidden"><thead><tr><th>ถ้าอยากหาคำที่...ให้ใส่...</th></tr></thead>
+        <tbody><tr><td><p>มีตัวอักษรในตำแหน่งที่กำหนด</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">ส..น</button></div>
+                <br></td>
+            </tr><tr><td><p>ขึ้นต้นด้วย สับ</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">สับ*</button></div>
+                <br></td>
+            </tr><tr><td><p>มีตัวอักษรเรียงกันตามลำดับ</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">*ธ*ท*</button></div>
+                <br></td>
+            </tr><tr><td><p>anagram ตัวอักษรทั้งหมด</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">/กลม</button></div>
+                <br></td>
+            </tr><tr><td><p>anagram ตัวอักษรทั้งหมด และเพิ่มอีกกี่ตัวก็ได้</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">/กะลา*</button></div>
+                <br></td>
+            </tr><tr><td><p>มี 3-8 ตัวอักษร และมี ก ข ค</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">3-8:/กขค*</button></div>
+                <br></td>
+            </tr><tr><td><p>มีอย่างน้อย 12 ตัวอักษร และมี ปลา</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">12-:*ปลา*</button></div>
+                <br></td>
+            </tr><tr><td><p>มี 7 ตัวอักษร มี ม อยู่ตำแหน่งที่ 3 และมี ส ะ</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">7:..ม* &amp; /สะ*</button></div>
+                <br></td>
+            </tr><tr><td><p>มี 11 ตัวอักษร และไม่มีสระในบรรทัด</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">11:/* &amp; ^ใเแโไาำะฤา</button></div>
+                <br></td>
+            </tr><tr><td><p>มี ฮ แต่ไม่ได้ขึ้นต้นด้วย ฮ</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">/*ฮ &amp; !ฮ*</button></div>
+                <br></td>
+            </tr></tbody></table></div></div>
 
 <footer class="p-4 footer bg-base-300 text-base-content footer-center"><div class="flex flex-row justify-center"><a href="https://github.com/lemononmars/thwordsearch" target="_blank" class="link link-primary">Github</a>
     <a href="https://twitter.com/SakulbuthE" target="_blank" class="link link-primary">เสนอแนะ/แจ้งบัค</a>
