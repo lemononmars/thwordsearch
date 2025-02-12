@@ -1,5 +1,5 @@
 import dict from '$lib/dict.json'
-//import dict from '$lib/dictsm.json'
+import wiki from '$lib/wiki.json'
 
 export function splitWord(word: string) {
   const alphas = word.split("")
@@ -30,7 +30,8 @@ function removeSymbols(word: string) {
   return word.replace(/[\*\.\/\&\|\^\[\]]/g, "")
 }
 
-export function search(query: string) {
+export function search(query: string, includeWiki: boolean) {
+  console.log(wiki[0])
   // TODO: also check weird input (like several /, or / with multiple *)
   if(!query)
     return {valid: false, count:0, results: []}
@@ -64,6 +65,21 @@ export function search(query: string) {
       results = [...results, w]
   })
 
+  if(includeWiki) {
+    wiki.forEach((w: string)=>{
+      let matchedQuery = 0
+      queries.forEach((q)=>{
+        var result = matchQuery(w,q,excluded)
+        result = q.includes("!")? !result: result
+        matchedQuery += result?1:0
+      })
+      if(
+        (andMode && matchedQuery === queries.length)
+        || (!andMode && matchedQuery > 0)
+      )
+        results = [...results, w]
+    })
+  }
   return {
     valid: true,
     count: results.length, 

@@ -6,8 +6,9 @@
   let query: string = ""
   let start: number = 0
   let input: string = query
-  const atHomePage: boolean = (!query)? true: false
-  let queryResults = search(query)
+  //const atHomePage: boolean = (!query)? true: false
+  let includeWiki: boolean = false
+  let queryResults = search(query, includeWiki)
   let mode: number = 1 // 0 = page, 1 = first letter
   let letter: string = ""
   let allFirstLetters = []
@@ -50,7 +51,7 @@
       query = input
       start = 0
       letter = ""
-      queryResults = search(query)
+      queryResults = search(query, includeWiki)
 
       allFirstLetters = []
       if(queryResults.results.length == 0)
@@ -87,6 +88,12 @@
     <button on:click={()=>query=""} class="btn btn-sm lg:btn-md btn-secondary">
       วิธีใช้
     </button> 
+    <div class="form-control">
+      <label class="label cursor-pointer">
+        <span class="label-text">รวมหัวข้อใน wikipedia</span>
+        <input type="checkbox" class="checkbox" bind:checked={includeWiki}/>
+      </label>
+    </div>
   </div>
 
   <div class="overflow-x-auto mx-auto">
