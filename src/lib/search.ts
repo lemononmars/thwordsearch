@@ -31,7 +31,6 @@ function removeSymbols(word: string) {
 }
 
 export function search(query: string, includeWiki: boolean) {
-  console.log(wiki[0])
   // TODO: also check weird input (like several /, or / with multiple *)
   if(!query)
     return {valid: false, count:0, results: []}
@@ -80,6 +79,8 @@ export function search(query: string, includeWiki: boolean) {
         results = [...results, w]
     })
   }
+
+  results.sort()
   return {
     valid: true,
     count: results.length, 

@@ -73,25 +73,27 @@
 
 
 <div class="flex flex-col justify-items-center text-center gap-2">
-  <h1 class="text-md lg:text-5xl font-extrabold mb-2">TH Wordle Search</h1>
-  <div class="flex flex-row justify-center gap-2">
-    <input
-      type="text"
-      class="input input-bordered input-sm lg:input-md lg:text-xl"
-      on:keypress={onKeypress}
-      bind:value={input}
-      placeholder="พิมพ์รูปแบบที่นี่"
-    />
-    <button on:click={submit} class="btn btn-sm lg:btn-md btn-primary">
-      หา
-    </button>
-    <button on:click={()=>query=""} class="btn btn-sm lg:btn-md btn-secondary">
-      วิธีใช้
-    </button> 
+  <h1 class="text-xl lg:text-5xl font-extrabold mb-2">TH Wordle Search</h1>
+  <div class="flex flex-col lg:flex-row m-auto">
+    <div class="flex flex-row justify-center gap-2">
+        <input
+          type="text"
+          class="input input-bordered input-sm lg:input-md lg:text-xl"
+          on:keypress={onKeypress}
+          bind:value={input}
+          placeholder="พิมพ์รูปแบบที่นี่"
+        />
+        <button on:click={submit} class="btn btn-sm lg:btn-md btn-primary">
+          หา
+        </button>
+        <button on:click={()=>query=""} class="btn btn-sm lg:btn-md btn-secondary">
+          วิธีใช้
+        </button>
+    </div>
     <div class="form-control">
       <label class="label cursor-pointer">
+        <input type="checkbox" class="checkbox mx-2" bind:checked={includeWiki}/>
         <span class="label-text">รวมหัวข้อใน wikipedia</span>
-        <input type="checkbox" class="checkbox" bind:checked={includeWiki}/>
       </label>
     </div>
   </div>
