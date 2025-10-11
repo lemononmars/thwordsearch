@@ -14,12 +14,12 @@
       gtag("config", `${gtagId}`)
     </script>
 	<link rel="stylesheet" href="/thwordsearch/app_/assets/vendor-4ea7804a.css">
-	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-45205ad1.css">
-	<link rel="modulepreload" href="/thwordsearch/app_/start-bdd66652.js">
+	<link rel="stylesheet" href="/thwordsearch/app_/assets/pages/__layout.svelte-389180b8.css">
+	<link rel="modulepreload" href="/thwordsearch/app_/start-7e2d77b0.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/chunks/vendor-3ed23e30.js">
 	<link rel="modulepreload" href="/thwordsearch/app_/pages/__layout.svelte-69490e9f.js">
-	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-122d098b.js"><script type="module">
-		import { start } from "/thwordsearch/app_/start-bdd66652.js";
+	<link rel="modulepreload" href="/thwordsearch/app_/pages/index.svelte-b3144b3a.js"><script type="module">
+		import { start } from "/thwordsearch/app_/start-7e2d77b0.js";
 		start({
 			target: document.querySelector("#svelte"),
 			paths: {"base":"/thwordsearch","assets":"/thwordsearch"},
@@ -32,7 +32,7 @@
 				error: null,
 				nodes: [
 					import("/thwordsearch/app_/pages/__layout.svelte-69490e9f.js"),
-						import("/thwordsearch/app_/pages/index.svelte-122d098b.js")
+						import("/thwordsearch/app_/pages/index.svelte-b3144b3a.js")
 				],
 				url: new URL("http://sveltekit-prerender/thwordsearch"),
 				params: {}
@@ -63,6 +63,18 @@
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">ส..น</button>
               </div></td>
             <td>สงวน, สถาน, สุทัศน์, ...</td>
+          </tr><tr><td>ตัวอักษรบางตำแหน่งเป็นไปได้หลายแบบ</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">[ใไโ]..</button>
+              </div></td>
+            <td>โกก, ไกร, ใกล้, ...</td>
+          </tr><tr><td>มีแต่ตัวอักษรที่กำหนด</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">{บนมา}</button>
+              </div></td>
+            <td>มัน, นมนาน, บนบาน, ...</td>
+          </tr><tr><td>มีตัวอักษรที่กำหนด และตัวอักษรอื่นได้อีก 1 ตัว</td>
+            <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">{บนมา}+1</button>
+              </div></td>
+            <td>รามา, สนามบิน, ขนานนาม, ...</td>
           </tr><tr><td>ขึ้นต้นด้วย สับ</td>
             <td><div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-block font-thin text-xl">สับ*</button>
               </div></td>
@@ -103,6 +115,15 @@
       <table class="table table-compact table-zebra w-48 lg:hidden"><thead><tr><th>ถ้าอยากหาคำที่...ให้ใส่...</th></tr></thead>
         <tbody><tr><td><p>มีตัวอักษรในตำแหน่งที่กำหนด</p>
                 <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">ส..น</button></div>
+                <br></td>
+            </tr><tr><td><p>ตัวอักษรบางตำแหน่งเป็นไปได้หลายแบบ</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">[ใไโ]..</button></div>
+                <br></td>
+            </tr><tr><td><p>มีแต่ตัวอักษรที่กำหนด</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">{บนมา}</button></div>
+                <br></td>
+            </tr><tr><td><p>มีตัวอักษรที่กำหนด และตัวอักษรอื่นได้อีก 1 ตัว</p>
+                <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">{บนมา}+1</button></div>
                 <br></td>
             </tr><tr><td><p>ขึ้นต้นด้วย สับ</p>
                 <div data-tip="ลองเลย" class="tooltip"><button class="btn btn-info btn-xs text-sm">สับ*</button></div>
