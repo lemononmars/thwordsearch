@@ -4,6 +4,8 @@ THwordle Search is a pattern-matching word-search tool for puzzle solving and co
 ## Feature
 - Support basic patterns
 * `.` for a single wild character
+* `[]` for one of the characters in the brackets
+* `{}+n` for allowed characters plus at most n other characters
 * `/` for anagram
 * `*` for any number of wild characters (including zero)
 * `#-#:` for max and min string length
@@ -15,7 +17,7 @@ THwordle Search is a pattern-matching word-search tool for puzzle solving and co
 - [ ] Add more advanced patterns (ideally, all of [these](https://www.quinapalus.com/qat.html))
 - [x] Use a better dictionary 
 - [ ] Remove bad words from the dictionary
-- [ ] Add interesting dictionary
+- [x] Add interesting dictionary
 
 ## Resources
 - [sveltekit-typescript-postcss-tailwind2](https://github.com/dansvel/sveltekit-typescript-postcss-tailwind2) for head start

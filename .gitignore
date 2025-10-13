@@ -7,4 +7,4 @@ node_modules
 /build
 /functions
 gh-pages.js
-removedupe.js
+/test

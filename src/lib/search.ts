@@ -3,7 +3,7 @@ import wiki from '$lib/wiki.json'
 
 export function splitWord(word: string) {
   const alphas = word.split("")
-  const out = []
+  const out: string[] = []
 
   alphas.forEach((a) => {
     if (a.match(/[ก-ฮ]/) || a.match(/[ใเแโไาำะๆฯฤา]/) || a.match(/[\.\*\/\[\]]/)) {
@@ -17,7 +17,7 @@ export function splitWord(word: string) {
 }
 
 export function wordLength(word: string) {
-  return word.replace(/[่้๊๋ิีึืฺุู์]/g, "").length
+  return word.replace(/[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g, "").length
 }
 
 export function getFirstLetter(word: string) {
@@ -37,12 +37,11 @@ export function search(query: string, includeWiki: boolean) {
   let andMode = query.includes('&')
   let queries = query.split(/[\&\|]/).map((q)=>
     q.trim()
-    .replace(/[\!]/g, "") // negation (!) will be checked after returned
     .replace(/[\*]{2,}/g, "*") // replace multiple * with a single *
-    .replace(/\*\./g, ".*") // replace substring *. with .*
+    .replace(/\*\./g, ".*") // replace substring *. with .* for slight speedup 
   )
 
-  let excluded = []
+  let excluded: string[] = []
   let excludedQuery = queries.filter((q)=>q.includes("^"))
   excludedQuery.forEach((eq)=> 
     excluded = excluded.concat(splitWord(removeSymbols(eq)))
@@ -54,7 +53,7 @@ export function search(query: string, includeWiki: boolean) {
 
   let minLength = 0
   let maxLength = 100
-  let lengthQuery = queries.find((q)=>q.includes(":")) // only one length query is allowed
+  let lengthQuery = queries.find((q)=>q.includes(":")) // only the first length query is used
   if(lengthQuery) {
     let lengthStr = lengthQuery.slice(0, lengthQuery.indexOf(":"))
 
@@ -69,7 +68,7 @@ export function search(query: string, includeWiki: boolean) {
       maxLength = parseInt(maxStr)
   }
   
-  let results = []
+  let results: string[] = []
   // check each word against all queries
   dict.forEach((w)=>{
     const len = wordLength(w)
@@ -106,7 +105,8 @@ export function search(query: string, includeWiki: boolean) {
     })
   }
 
-  results.sort()
+  // sort locale Thai
+  results = results.sort((a,b)=>a.localeCompare(b, 'th'))
   return {
     valid: true,
     count: results.length, 
@@ -143,7 +143,7 @@ function matchQuery(w: string, q: string, e:string[]):boolean{
     for(const qIndex in querySplitted)
       for(const wIndex in wordSplitted)
         if(wordSplitted[wIndex] && wordSplitted[wIndex].startsWith(querySplitted[qIndex])) {
-          wordSplitted[wIndex] = null
+          wordSplitted[wIndex] = ''
           numMatches ++
           break
         }
@@ -163,13 +163,8 @@ function matchQuery(w: string, q: string, e:string[]):boolean{
     let subset = q.slice(subsetStart+1, subsetEnd).split("")
     let extra = q.slice(q.indexOf("}")+1)
     let allowedExtra = 0
-    if(extra.length > 0) {
-      if(extra[0] === "+") {
+    if(extra.length > 0 && extra[0] === "+")
         allowedExtra = parseInt(extra.slice(1)) || 0
-      } else {
-        return false // invalid format
-      }
-    }
     let numOutside = 0
     for(const wIndex in wordSplitted)
       if(!subset.some((s)=>wordSplitted[wIndex].startsWith(s)))
@@ -178,7 +173,7 @@ function matchQuery(w: string, q: string, e:string[]):boolean{
     return true
   }
 
-  // Type 3: No anagram
+  // Type 3: No anagram or subset - normal matching
   if(!mode.anagram) {
     let qIndex = 0, wIndex = 0
     while(qIndex < querySplitted.length && wIndex < wordSplitted.length){
