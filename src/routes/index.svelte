@@ -2,6 +2,7 @@
   import Head from '$lib/Head.svelte'
   import Social from '$lib/Social.svelte'
   import {search, getFirstLetter} from '$lib/search'
+  import {slide} from 'svelte/transition'
 
   let query: string = ""
   let start: number = 0
@@ -9,9 +10,12 @@
   //const atHomePage: boolean = (!query)? true: false
   let includeWiki: boolean = false
   let queryResults = search(query, includeWiki)
-  let mode: number = 1 // 0 = page, 1 = first letter
+  let loading : boolean = false
+  let revealHistory: boolean = false
+  let history: string[] = []
+
   let letter: string = ""
-  let allFirstLetters = []
+  let allFirstLetters: string[] = []
   $: filteredResults = letter === "" ? queryResults.results: queryResults.results.filter(r=>getFirstLetter(r) == letter)
   $: currentQueryResults = filteredResults.slice(start, start + Math.min(100, queryResults.count-start))
 
@@ -20,8 +24,6 @@
   const description = "Pattern-matching in Thai language"
   const imageUrl = ""
   const gtagId = "G-YTV7TZ3EMC"
-
-  let modalText: string = ""
 
   const examples = [
     ["มีตัวอักษรในตำแหน่งที่กำหนด","ส..น", "สงวน, สถาน, สุทัศน์, ..."],
@@ -54,6 +56,8 @@
       query = input
       start = 0
       letter = ""
+      loading = true
+      history = [...history, query]
       queryResults = search(query, includeWiki)
 
       allFirstLetters = []
@@ -68,6 +72,7 @@
           allFirstLetters.push(latest)
         }
       }
+      loading = false
     }
   }
 </script>
@@ -86,20 +91,48 @@
           bind:value={input}
           placeholder="พิมพ์รูปแบบที่นี่"
         />
-        <button on:click={submit} class="btn btn-sm lg:btn-md btn-primary">
-          หา
+        <button on:click={submit} class="btn btn-sm lg:btn-md btn-primary" class:loading={loading}>
+          {#if !loading}
+            หา
+          {/if} 
         </button>
         <button on:click={()=>query=""} class="btn btn-sm lg:btn-md btn-secondary">
           วิธีใช้
         </button>
     </div>
-    <div class="form-control">
-      <label class="label cursor-pointer">
-        <input type="checkbox" class="checkbox mx-2" bind:checked={includeWiki}/>
-        <span class="label-text">รวมหัวข้อใน wikipedia</span>
-      </label>
+    <div class="flex flex-row justify-center ml-4">
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <input type="checkbox" class="checkbox mx-2" bind:checked={includeWiki}/>
+          <span class="label-text">รวมหัวข้อใน wikipedia</span>
+        </label>
+      </div>
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <input type="checkbox" class="checkbox mx-2" bind:checked={revealHistory}/>
+          <span class="label-text">แสดงประวัติการค้นหา</span>
+        </label>
+      </div>
     </div>
   </div>
+  {#if revealHistory}
+    <div class="flex flex-row-reverse border border-base-300 bg-base-100 rounded-box my-2 p-4 gap-2 justify-center" 
+      in:slide={{duration:300}} out:slide={{duration:300}}
+      >
+      {#key history}
+          {#each history as h}
+            <div>
+              <button class="btn btn-primary btn-outline text-lg" on:click={()=>{
+                input = h;
+                submit();
+              }}>{h}</button>
+            </div>
+          {:else}
+            <span class="text-sm">ยังไม่มีประวัติการค้นหา</span>
+          {/each}
+      {/key}
+    </div>
+  {/if}
 
   <div class="overflow-x-auto mx-auto">
     {#if query}

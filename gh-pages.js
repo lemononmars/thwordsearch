@@ -8,7 +8,8 @@ ghpages.publish(
         user: {
             name: 'lemononmars',
             email: 'sakulbuth@gmail.com'
-        }
+        },
+        nojekyll: true,
     },
     () => {
         console.log('Deploy Complete!')
